@@ -18,7 +18,7 @@ var debug = false
 
 // Story returns a Story by ID id.
 func Story(id uint32, cc string, l string) (Page, error) {
-	const errMsg = "[ERR] scraper.Story(%d,%s,%s): %v\n"
+	const errMsg = "[ERR] appstoreapi.Story(%d,%s,%s): %v\n"
 	const baseURL = "https://apps.apple.com/%s/story/id%d"
 	uri, err := url.Parse(fmt.Sprintf(baseURL, cc, id))
 	if err != nil {
@@ -68,7 +68,7 @@ func Story(id uint32, cc string, l string) (Page, error) {
 
 // Suggestions returns suggestions by a keyword.
 func Suggestions(keyword string, cc string, l string) []byte {
-	const errMsg = "[ERR] scraper.Suggestions(%s,%s,%s): %v\n"
+	const errMsg = "[ERR] appstoreapi.Suggestions(%s,%s,%s): %v\n"
 	const baseURL = "https://search.itunes.apple.com/WebObjects/MZSearchHints.woa/wa/hints"
 	uri, err := url.Parse(baseURL)
 	if err != nil {
@@ -111,7 +111,7 @@ func Suggestions(keyword string, cc string, l string) []byte {
 
 // Genre returns App Store root page for Genre structure
 func Genre(id uint32, cc string) (Page, error) {
-	const errMsg = "[ERR] scraper.Genre(%d,%s): %v\n"
+	const errMsg = "[ERR] appstoreapi.Genre(%d,%s): %v\n"
 	const baseURL = "https://itunes.apple.com/%s/genre"
 	uri, err := url.Parse(fmt.Sprintf(baseURL, cc))
 	if err != nil {
@@ -174,7 +174,7 @@ func Genre(id uint32, cc string) (Page, error) {
 
 // Grouping returns App Store root page for Grouping structure
 func Grouping(id uint32, cc string, l string) (Page, error) {
-	const errMsg = "[ERR] scraper.Grouping(%d,%s,%s): %v\n"
+	const errMsg = "[ERR] appstoreapi.Grouping(%d,%s,%s): %v\n"
 	const baseURL = "http://itunes.apple.com/WebObjects/MZStore.woa/wa/viewGrouping"
 	uri, err := url.Parse(baseURL)
 	if err != nil {
@@ -238,7 +238,7 @@ func Grouping(id uint32, cc string, l string) (Page, error) {
 
 // Room returns a Room by its ID.
 func Room(id uint32, cc string, l string) (Page, error) {
-	const errMsg = "[ERR] scraper.Room(%d,%s,%s): %v\n"
+	const errMsg = "[ERR] appstoreapi.Room(%d,%s,%s): %v\n"
 	const baseURL = "https://itunes.apple.com/WebObjects/MZStore.woa/wa/viewRoom"
 	uri, err := url.Parse(baseURL)
 	if err != nil {
@@ -303,7 +303,7 @@ func Room(id uint32, cc string, l string) (Page, error) {
 
 // App returns an application by ID id.
 func App(id uint32, cc string, l string) (Page, error) {
-	const errMsg = "[ERR] scraper.App(%d,%s,%s): %v\n"
+	const errMsg = "[ERR] appstoreapi.App(%d,%s,%s): %v\n"
 	const baseURL = "https://apps.apple.com/%s/app/id%d"
 	uri, err := url.Parse(fmt.Sprintf(baseURL, cc, id))
 	if err != nil {
@@ -352,7 +352,7 @@ func App(id uint32, cc string, l string) (Page, error) {
 
 // Bundle returns a bundle by ID id.
 func Bundle(id uint32, cc string, l string) (Page, error) {
-	const errMsg = "[ERR] scraper.Bundle(%d,%s,%s): %v\n"
+	const errMsg = "[ERR] appstoreapi.Bundle(%d,%s,%s): %v\n"
 	const baseURL = "https://apps.apple.com/%s/app-bundle/id%d"
 	uri, err := url.Parse(fmt.Sprintf(baseURL, cc, id))
 	if err != nil {
@@ -401,7 +401,7 @@ func Bundle(id uint32, cc string, l string) (Page, error) {
 
 // AppIDs returns application IDs by a keyword.
 func AppIDs(keyword string, cc string, l string) []MetadataResponse {
-	const errMsg = "[ERR] scraper.AsAppIDs(%s,%s,%s): %v\n"
+	const errMsg = "[ERR] appstoreapi.AppIDs(%s,%s,%s): %v\n"
 	const baseURL = "https://search.itunes.apple.com/WebObjects/MZStore.woa/wa/search"
 	uri, err := url.Parse(baseURL)
 	if err != nil {
