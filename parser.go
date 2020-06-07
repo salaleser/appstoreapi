@@ -46,7 +46,7 @@ func ParsePage(body []byte) (Page, error) {
 
 // ParsePageAdamIDsString converts "adamIds" []string to []int.
 func ParsePageAdamIDsString(body []byte) (Page, error) {
-	fmt.Fprintf(os.Stderr, "Room \"adamIds\" of type []string.\n")
+	fmt.Fprintf(os.Stdout, "Room \"adamIds\" of type []string.\n")
 
 	var page Page
 
@@ -58,7 +58,10 @@ func ParsePageAdamIDsString(body []byte) (Page, error) {
 
 	page2adamIDs := make([]int, 0)
 	for _, adamID := range page2.PageData.AdamIDs {
-		id, _ := strconv.Atoi(adamID)
+		id, err := strconv.Atoi(adamID)
+		if err != nil {
+			fmt.Fprintf(os.Stderr, "converting string adamID to int %q\n", adamID)
+		}
 		page2adamIDs = append(page2adamIDs, id)
 	}
 	page.StorePlatformData = page2.StorePlatformData
