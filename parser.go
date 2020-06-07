@@ -7,12 +7,12 @@ import (
 	"strconv"
 )
 
-func parseIDs(body []byte) []MetadataResponse {
+func parseIDs(body []byte) ([]MetadataResponse, error) {
 	const errMsg = "[ERR] scraper.parseAsIDs(%s...): %v\n"
 	var data Page
 	if err := json.Unmarshal(body, &data); err != nil {
 		fmt.Fprintf(os.Stderr, errMsg, body[:10], err)
-		return []MetadataResponse{}
+		return []MetadataResponse{}, err
 	}
 
 	metadatas := make([]MetadataResponse, 0)
@@ -30,7 +30,7 @@ func parseIDs(body []byte) []MetadataResponse {
 		metadatas = append(metadatas, metadata)
 	}
 
-	return metadatas
+	return metadatas, nil
 }
 
 // ParsePage parses App Store root page and returns structure.

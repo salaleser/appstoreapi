@@ -439,5 +439,5 @@ func AppIDs(keyword string, cc string, l string) ([]MetadataResponse, error) {
 		return []MetadataResponse{}, err
 	}
 
-	return parseIDs(body), nil
+	return parseIDs(body)
 }
