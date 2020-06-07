@@ -400,19 +400,19 @@ func Bundle(id uint32, cc string, l string) (Page, error) {
 }
 
 // AppIDs returns application IDs by a keyword.
-func AppIDs(keyword string, cc string, l string) []MetadataResponse {
+func AppIDs(keyword string, cc string, l string) ([]MetadataResponse, error) {
 	const errMsg = "[ERR] appstoreapi.AppIDs(%s,%s,%s): %v\n"
 	const baseURL = "https://search.itunes.apple.com/WebObjects/MZStore.woa/wa/search"
 	uri, err := url.Parse(baseURL)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, errMsg, keyword, cc, l, err)
-		return []MetadataResponse{}
+		return []MetadataResponse{}, err
 	}
 
 	query, err := url.ParseQuery(uri.RawQuery)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, errMsg, keyword, cc, l, err)
-		return []MetadataResponse{}
+		return []MetadataResponse{}, err
 	}
 	query.Add("clientApplication", "Software")
 	query.Add("caller", "com.apple.AppStore")
@@ -430,14 +430,14 @@ func AppIDs(keyword string, cc string, l string) []MetadataResponse {
 	resp, err := client.Do(req)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, errMsg, keyword, cc, l, err)
-		return []MetadataResponse{}
+		return []MetadataResponse{}, err
 	}
 
 	body, err := ioutil.ReadAll(resp.Body)
 	if err != nil {
 		fmt.Fprintf(os.Stderr, errMsg, keyword, cc, l, err)
-		return []MetadataResponse{}
+		return []MetadataResponse{}, err
 	}
 
-	return parseIDs(body)
+	return parseIDs(body), nil
 }
